@@ -22,35 +22,53 @@
 
 </head>
 <body>
-
-  <div id="mapid"></div>
-  
+ 
   <header>
-    <h1>IP Address Tracker</h1>
-    <input type="text" id="ip-input" class="ip-input" placeholder="Search for any IP address or domain"> 
-    <button id="ip-input-button"></button>
-    <div class="data-container" id="data-container">
-      <span id="ip-adress" class="ip-adress"></span>
-      <span id="location" class="location"></span>
-      <span id="timezone" class="timezone"></span>
-      <span id="isp" class="isp"></span>
 
+    <h1 class="main-title">IP Address Tracker</h1>
+    <div class="input-container">
+      <input type="text" id="ip-input" class="ip-input" placeholder="Search for any IP address or domain"> 
+    <button id="ip-input-button" class="ip-input-button"> <img src="./images/icon-arrow.svg" alt=""></button>
     </div>
+    
+
+    <div class="data-container" id="data-container">
+      <div class="ip-container">
+        <h2>ip adress</h2>
+      <span id="ip-adress" class="ip-adress"></span>
+      </div>
+      <div class="location-container">
+        <h2>location</h2>
+      <span id="location" class="location"></span>
+      </div>
+      <div class="timezone-container">
+        <h2>timezone</h2>
+      <span id="timezone"class="timezone"></span> 
+      </div>
+      <div class="isp-container">
+        <h2>isp</h2>
+      <span id="isp" class="isp"></span>
+      </div>   
+      
+    </div>
+
   </header>
-  
+
+  <section class="background-img-section">
+    
+  </section>
+
+  <section class="background-section">
+    <img src="./images/pattern-bg.png" alt="">
+    <div id="mapid" class="id-map"></div>
+    <footer class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+      Coded by <a href="#">Your Name Here</a>.
+    </footer>
+  </section>
  
   
-
-  IP Address
-  Location
-  Timezone
-    UTC <!-- add offset value dynamically using the API -->
-  ISP
   
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
 
   <script src="codigo.js">  </script>
 </body>

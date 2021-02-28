@@ -1,1 +1,84 @@
+/*colores
+Very Dark Gray: hsl(0, 0%, 17%)
+Dark Gray: hsl(0, 0%, 59%)
+*/
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+
+*{
+    font-family: 'Rubik', sans-serif;
+}
 #mapid { height: 180px; }
+
+
+body {
+    position: relative;
+    text-align: center;
+}
+.background-section{
+    position:absolute;
+    top: 0;
+    z-index: -1;
+    max-width: 100vw;
+    overflow: hidden;
+    min-height: 100vh;
+}
+.main-title{
+    padding: 50px;
+    color: #fff;
+}
+.input-container{
+    position: relative;
+}
+.ip-input{
+    font-size: 18px;
+    padding: 15px;
+    width: 400px;
+    background-color: #fff;
+    color:hsl(0,0%,59%);
+    border: 0;
+    border-bottom-left-radius:10px ;
+    border-top-left-radius:10px ;
+    cursor: pointer;
+    outline: none;
+}
+.ip-input-button{
+    background-color: hsl(0,0%,17%);
+    border: none;
+    height: 100%;
+    position: absolute;
+    border-bottom-right-radius:10px ;
+    border-top-right-radius:10px ;
+    width: 50px;
+}
+.data-container{
+    margin: auto;
+    margin-top: 30px;
+    display: flex;
+    width: 70%;
+    background-color: #fff;
+    padding: 20px;
+    height: 100px;
+    border-radius: 10px;
+    justify-content: space-between;
+    text-transform: uppercase;  
+}
+.data-container div {
+    flex-grow: 1;
+}
+.location-container, .timezone-container, .isp-container{
+    height: 50%;
+    border-left: 1px solid hsl(0,0%,59%);
+}
+.data-container h2 {
+    margin-left: 20px;
+    color: hsl(0,0%,59%);
+    font-size: 12px;
+}
+.data-container span {
+    color: hsl(0,0%,17%);
+    font-size: 18px;
+}
+.id-map{
+    width: 100%;
+    height: 100%;
+}
