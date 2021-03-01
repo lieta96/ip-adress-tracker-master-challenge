@@ -30,7 +30,7 @@ let ipInputButton =document.getElementById ("ip-input-button");
 // Toma la data del IP
 function getDataFromApi(ipValue){
     ip=ipValue;
-    url =`https://geo.ipify.org/api/v1?apiKey=at_YKOtxrjfhl1ZbUVmAAa7XzUwThXDg&ipAddress=${ip}`;
+    url =`https://geo.ipify.org/api/v1?apiKey=at_YKOtxrjfhl1ZbUVmAAa7XzUwThXDg&domain=${ip}`;
     fetch(url)
     .then(response => response.json())
     .then(data =>{
