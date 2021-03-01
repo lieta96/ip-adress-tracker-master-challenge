@@ -1,65 +1,79 @@
-// de acá tengo que sacar la localizacion del ip https://geo.ipify.org/docs
-
-
+// Mapa a partir de leaflet
 var mymap = L.map('mapid').setView([51.505, -0.09], 13);
-
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibGlldGE5NiIsImEiOiJja2xuNTRuM3EwZnhkMndxajdlaTIyZWg1In0.nIgbphz0nKrqt5QvaCa38w', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
     id: 'mapbox/streets-v11',
     tileSize: 512,
     zoomOffset: -1,
-    accessToken: 'your.mapbox.access.token'
+    accessToken: 'your.mapbox.access.token',
+    setZoom: 13
 }).addTo(mymap);
 
-//--------------------meter en una función
+// Tomamos los elementos de HTML que completaremos con la info del IP
 let locationSpan =document.getElementById("location");
 let ipAdressSpan =document.getElementById("ip-adress");
 let timezoneSpan =document.getElementById("timezone");
 let ispSpan =document.getElementById("isp");
-// el IP lo sacamos del input
-// -------------- sería interesante hacer algún tipo de validación
-let ipInput=document.getElementById("ip-input"); 
-ipInput.addEventListener("keyup", function(event) {
-    if (event.key === "Enter") {
-        ip=ipInput.value;
-        url =`https://geo.ipify.org/api/v1?apiKey=at_YKOtxrjfhl1ZbUVmAAa7XzUwThXDg&ipAddress=${ip}`; 
-        fetch(url)
-            .then(response => response.json())
-            .then(data =>{
-                let lat= data.location.lat;
-                let lng= data.location.lng ;
-                ipAdressSpan=data.ip;
-                ispSpan.innerHTML= data.isp;
-                timezoneSpan.innerHTML=data.location.timezone;
-                locationSpan.innerHTML=`${data.location.city}, ${data.location.region}, ${data.location.country}`;
-                console.log(data)
-                //marco en el mapa la localización del ID a partir de la latitud y la longitud
-                let marker = L.marker([lat, lng]).addTo(mymap);
 
-            })
-            // throw agregar por las dudassssssssssssssssssssssssss
-     }
+// Armamos una función para mostrar en pantalla la información que viene del IP
+function showDataIP(ip,location,timezone,isp){
+    ipAdressSpan.innerHTML=ip;
+    ispSpan.innerHTML= isp;
+    timezoneSpan.innerHTML=timezone;
+    locationSpan.innerHTML=location;
+};
+
+let ipInput=document.getElementById("ip-input"); 
+let ipInputButton =document.getElementById ("ip-input-button");
+
+// Toma la data del IP
+function getDataFromApi(ipValue){
+    ip=ipValue;
+    url =`https://geo.ipify.org/api/v1?apiKey=at_YKOtxrjfhl1ZbUVmAAa7XzUwThXDg&ipAddress=${ip}`;
+    fetch(url)
+    .then(response => response.json())
+    .then(data =>{
+        let lat= data.location.lat;
+        let lng= data.location.lng ;
+        // Ejecutamos la función showDataIp para mostrar en pantalla los valores que necesitamos
+        showDataIP (ip,
+            `${data.location.city}, ${data.location.region}, ${data.location.country}`,
+            data.location.timezone,
+            data.isp);
+        // Marcamos en el mapa la localización del ID a partir de la latitud y la longitud, lo centramos
+        let marker = L.marker([lat, lng]).addTo(mymap);
+        // Centramos el mapa en la nueva coordenada
+        mymap.panTo(new L.LatLng(lat, lng));
+        mymap.setZoom(13);
+    })
+    .catch(function(error) {
+        console.log('Hubo un problema con la petición Fetch:' + error.message);
+        alert('Hubo un problema con la petición Fetch:' + error.message + '\n También es posible que se haya ingresado un valor incorrecto.')
+      });
+}
+
+// Cuando cargamos la página toma el IP 8.8.8.8 y ejecuta la función que llama a la api
+document.addEventListener("DOMContentLoaded", function(event) {
+    getDataFromApi ("8.8.8.8");
 });
 
+// Al introducir el input y tocar enter o el botón se muestra en pantalla la data del ip
+ipInput.addEventListener("keyup", function(event) {
+    let ipInput=document.getElementById("ip-input");
+    if (event.key === "Enter" && ipInput.value!="" ) {
+        getDataFromApi(ipInput)     
+    } 
+});
+ipInputButton.addEventListener("click", function(event) {
+    let ipInput=document.getElementById("ip-input"); 
+    if (ipInput.value!="") {
+        ipInput=ipInput.value;
+        getDataFromApi(ipInput)
+    } 
+});
 
-
-// -----------------------tengo que hacer una función o algo que me lea el url solo cuando lo tenga y que me lea la info que me devuelve el url
-
-// fetch (url) //devuele promesa encapsulada
-// .then (res=> res.text()); //devuelve promesa puede ser '.text' o '.json'
-// //.then (res=> console.log (res)); //devuelve texto de la promesa
-// // esto es la info que necesitamos de la API
-// data.location.country ,
-// data.location.region , 
-// data.location.city , 
-// data.location.lat 
-// data.location.lng 
-// data.location.timezone, 
-// data.isp
-
-
-//output format
+// Data útil: output format de la API
 // {
 //     "ip": "8.8.8.8",
 //     "location": {
