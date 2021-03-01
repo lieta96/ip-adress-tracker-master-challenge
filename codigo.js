@@ -60,15 +60,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 // Al introducir el input y tocar enter o el botón se muestra en pantalla la data del ip
 ipInput.addEventListener("keyup", function(event) {
-    let ipInput=document.getElementById("ip-input");
-    if (event.key === "Enter" && ipInput.value!="" ) {
+    if (event.keyCode === 13  ) {
+        let ipInput=document.getElementById("ip-input").value;
         getDataFromApi(ipInput)     
     } 
 });
 ipInputButton.addEventListener("click", function(event) {
-    let ipInput=document.getElementById("ip-input"); 
+    let ipInput=document.getElementById("ip-input").value; 
     if (ipInput.value!="") {
-        ipInput=ipInput.value;
         getDataFromApi(ipInput)
     } 
 });
