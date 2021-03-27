@@ -93,13 +93,17 @@ body {
     height: 100vh;
 }
 .attribution{
-    background-image: url("./images/pattern-bg.png");
+    z-index: 100000000;
+    position: absolute;
+    bottom: 0;
     height: 50px;
-    color: #fff;
+    color: #000;
     font-size: 15px;
     display: flex;
    align-items: center;
    justify-content: center;
+   width: 100%;
+  background-color: #fff;
 }
 .attribution a {
     color: hsl(0,0%,17%);
