@@ -103,11 +103,15 @@ body {
    align-items: center;
    justify-content: center;
    width: 100%;
-  background-color: #fff;
 }
 .attribution a {
     color: hsl(0,0%,17%);
     text-decoration: none;
+}
+.attribution-text{
+    padding: 10px;
+    background: #fff;
+    border-radius: 10px;
 }
 @media (max-width:600px ){
     .data-container{
